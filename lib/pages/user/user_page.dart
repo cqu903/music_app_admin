@@ -83,36 +83,9 @@ class ExampleSource extends AdvancedDataTableSource<UserVo> {
       NextPageRequest pageRequest,
       ) async {
     //the remote data source has to support the pagaing and sorting
-    final queryParameter = <String, dynamic>{
-      'offset': pageRequest.offset.toString(),
-      'pageSize': pageRequest.pageSize.toString(),
-      'sortIndex': ((pageRequest.columnSortIndex ?? 0) + 1).toString(),
-      'sortAsc': ((pageRequest.sortAscending ?? true) ? 1 : 0).toString(),
-      if (lastSearchTerm.isNotEmpty) 'companyFilter': lastSearchTerm,
-    };
+    List<UserVo> users = await search(page.Page(page: pageRequest.offset,size: pageRequest.pageSize));
+    return RemoteDataSourceDetails(100, users);
 
-    final requestUri = Uri.https(
-      'example.devowl.de',
-      '',
-      queryParameter,
-    );
 
-    final response = await http.get(requestUri);
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      return RemoteDataSourceDetails(
-        int.parse(data['totalRows'].toString()),
-        (data['rows'] as List<dynamic>)
-            .map(
-              (json) => CompanyContact.fromJson(json as Map<String, dynamic>),
-        )
-            .toList(),
-        filteredRows: lastSearchTerm.isNotEmpty
-            ? (data['rows'] as List<dynamic>).length
-            : null,
-      );
-    } else {
-      throw Exception('Unable to query remote server');
-    }
   }
 }
