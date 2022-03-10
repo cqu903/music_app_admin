@@ -28,15 +28,11 @@ class SideBar extends StatelessWidget {
             width: menuItemWidth,
           ),
           MenuItem(
-            label: "目录2",
-            contentKey: "test",
+            label: "音乐",
+            contentKey: "music",
             width: menuItemWidth,
           ),
-          MenuItem(
-            label: "目录3",
-            contentKey: "test",
-            width: menuItemWidth,
-          ),
+
         ],
       ),
     );
