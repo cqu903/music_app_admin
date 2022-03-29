@@ -67,7 +67,7 @@ class _LoginPanelState extends State<LoginPanel> {
                       _formKey.currentState!.save();
                       TokenVo tokenVo = await login(TokenCreateRequest(
                           username: username, password: password));
-                      SecureContext sc = SecureContext.build(tokenVo.token!);
+                      SecureContext.build(tokenVo.token!);
                       Navigator.of(context).popAndPushNamed("/");
                     }
                   },

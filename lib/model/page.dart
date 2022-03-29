@@ -1,4 +1,4 @@
-class Page{
+class Page {
   int? _page;
   int? _size;
 

@@ -32,7 +32,11 @@ class SideBar extends StatelessWidget {
             contentKey: "music",
             width: menuItemWidth,
           ),
-
+          MenuItem(
+            label: "测试",
+            contentKey: "test",
+            width: menuItemWidth,
+          )
         ],
       ),
     );
@@ -59,8 +63,10 @@ class MenuItem extends StatelessWidget {
         menuItemTouchEventBus.fire(MenuItemTabEvent(widgetName: contentKey));
       },
       child: Container(
+        decoration: const BoxDecoration(
+            border: Border(bottom: BorderSide(color: primary))),
         alignment: Alignment.centerLeft,
-        padding: const EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.only(left: 10, bottom: 5),
         width: width,
         margin: const EdgeInsets.symmetric(vertical: 5),
         child: Text(
